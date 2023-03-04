@@ -10,11 +10,11 @@ async function getTextFromWebPage(url: string): Promise<string> {
     const html = await response.text();
     const $ = cheerio.load(html);
     const text = $('body').text();
-    return text
+    return getSummarizedText(text)
 }
 
 async function getSummarizedText(text: string): Promise<string> {
-    return app.get('/api/sumario', async (req, res) => {
+    return app.get('/summary', async (req, res) => {
         try {
 
             const apiKey = process.env.OPENAI_API_KEY;
