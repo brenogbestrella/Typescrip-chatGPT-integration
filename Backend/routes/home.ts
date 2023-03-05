@@ -1,5 +1,7 @@
 import { Router } from "express";
 
+const controller = require("../controller/homeController")
+
 class HomeRouter {
   router: Router;
 
@@ -9,9 +11,7 @@ class HomeRouter {
   }
 
   private init() {
-    this.router.get("/", (req, res, next) => {
-      res.render("home");
-    });
+    this.router.post("/", controller.sendURL);
   }
 }
 
