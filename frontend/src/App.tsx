@@ -6,15 +6,31 @@ import api from "../src/Service/api"
 function App() {
 
   const [ link, setLink ] = useState("")
+  const [ summary, setSummary ] = useState("")
+  const [ loading, setLoading ] = useState(false)
 
-  async function handleOnClick(e: { preventDefault: () => void; }) {
+  async function handleOnClick(
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent> 
+  ) {
+    e.preventDefault();
     if (!link) return;
+  
+    setLoading(true);
+    try {
+      const { data } = await api.post('/', {
+        url: link,
+      })
+      console.log(typeof data)
+      console.log(data.lenght)
+      setSummary(data)
+      // console.log(data, "data do frontend!")
 
-    console.log(link)
-
-    const {data} = await api.post("/", {
-      url: link
-    })
+    } catch (error) {
+      console.log('Error:', error);
+      alert('An error ocurred while summarizing the text. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   }
 
 
@@ -36,9 +52,15 @@ function App() {
           type="button" 
           className="submit-summary" 
           onClick={handleOnClick}
+          disabled={loading}
         >
-          Summarize the text 
+          {loading ? 'Summarizing...' : 'Summarize the text'} 
         </button>
+        {summary && (
+          <div style={{ backgroundColor: 'white', padding: '10px', color: 'black' }}>
+            <p>{summary}</p>
+          </div>
+        )}
 
         
       </header>

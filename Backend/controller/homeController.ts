@@ -1,10 +1,14 @@
 const service = require("../services/HomeService")
 
 const controller = {
-  sendURL(req, res, next) {
-    const url = {...req.body}
-    service.getTextFromWebPage(url).then(() => res.status(204).send())
-    .catch((err) => next(err))
+  async sendURL(req, res, next) {
+    try {
+      const url = {...req.body}
+      const result = await service.getTextFromWebPage(url);
+      res.status(200).json(result);
+    } catch (error) {
+      next(error);
+    }
   }
 }
 
