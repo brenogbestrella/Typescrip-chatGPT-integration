@@ -2,19 +2,8 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+.App-main {
+  background-color: #4e3f91d2;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -22,17 +11,72 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  margin: 0;
+  padding: 0;
+  
 }
 
-.App-link {
-  color: #61dafb;
+html > body {
+  height: auto;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.text-label {
+  color: white;
+  font-family: Georgia, 'Times New Roman', Times, serif;
 }
+
+.input-text {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+button {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.summary-card {
+
+  background-color: #c5bfdfd2; 
+  padding: 10px; 
+  color: black; 
+  width: 1000px; 
+  margin:20px; 
+  border-radius: 10px;
+  border: solid 1px white;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+footer {
+  
+  position: absolute;
+  padding:0px;
+  margin:0px;
+  bottom: 0px;
+  z-index: 1000;
+  width: 100%;
+  background-color: #2b2e36;
+  overflow: hidden;
+  color: white;
+  font-weight: 500;
+}
+
+header {
+    padding:0px;
+    margin:0px;
+    position: absolute;
+    width: 100%;
+    height: 10%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    z-index: 1;
+    background-color: #2e2a44d2;
+    color: white;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+header > h1 {
+  font-size: 2rem;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+
