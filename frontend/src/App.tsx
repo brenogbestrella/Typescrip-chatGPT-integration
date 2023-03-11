@@ -24,10 +24,7 @@ function App() {
       const { data } = await api.post('/', {
         url: link,
       })
-      console.log(typeof data)
-      console.log(data.lenght)
       setSummary(data)
-      // console.log(data, "data do frontend!")
 
     } catch (error) {
       console.log('Error:', error);
