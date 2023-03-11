@@ -6,6 +6,7 @@ import api from "../src/Service/api"
 import { Form, Button } from 'react-bulma-components';
 import { Helmet } from 'react-helmet';
 
+
 function App() {
 
   const { Input, Field, Control, Label } = Form
@@ -76,7 +77,6 @@ function App() {
                 {summary}
             </div>
           )}
-
         </body> 
       </main>
       <footer className="App-footer">
