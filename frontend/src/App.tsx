@@ -5,6 +5,8 @@ import './App.css';
 import api from "../src/Service/api"
 import { Form, Button } from 'react-bulma-components';
 import { Helmet } from 'react-helmet';
+import { toast, ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 
 function App() {
@@ -13,6 +15,7 @@ function App() {
 
   const [ link, setLink ] = useState("")
   const [ summary, setSummary ] = useState("")
+  const [ password, setPassword ] = useState("")
   const [ loading, setLoading ] = useState(false)
 
   async function handleOnClick(
@@ -25,16 +28,30 @@ function App() {
     try {
       const { data } = await api.post('/', {
         url: link,
+        password: password,
       })
       setSummary(data)
+      setPassword("")
 
     } catch (error) {
       console.log('Error:', error);
-      alert('An error ocurred while summarizing the text. Please try again.');
+      notify()
     } finally {
       setLoading(false);
     }
   }
+  const notify = () => {
+    toast.error("An error ocurred. Try again.", {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored", 
+    });
+  };
 
 
   return (
@@ -62,6 +79,15 @@ function App() {
                 value={link} 
                 onChange={(e: { target: { value: React.SetStateAction<string>; }; }) => setLink(e.target.value)}
               />
+              <Input
+                className='input-password' 
+                type="password" 
+                name="password" 
+                id="password" 
+                placeholder="Please, insert password" 
+                value={password} 
+                onChange={(e: { target: { value: React.SetStateAction<string>; }; }) => setPassword(e.target.value)}
+              />
             </Control>
           </Field>
           <Button
@@ -72,6 +98,7 @@ function App() {
           >
             {loading ? 'Summarizing...' : 'Summarize'} 
           </Button>
+          <ToastContainer autoClose={8000} />
           {summary && (
             <div className="summary-card">
                 {summary}
