@@ -1,11 +1,11 @@
 import cheerio from "cheerio";
 import axios from "axios";
-require('dotenv').config;
+require('dotenv').config();
 
-async function getTextFromWebPage(urlObj: {url: string}): Promise<string> {
+async function getTextFromWebPage(url: string): Promise<string> {
     try {
-
-        const response = await axios.get(urlObj.url);
+        
+        const response = await axios.get(url);
         const html = response.data;
         const $ = cheerio.load(html);
 
@@ -31,14 +31,13 @@ async function getTextFromWebPage(urlObj: {url: string}): Promise<string> {
         return summarizedText
         
     } catch (error) {
-        console.error(error.response.data)
-        throw new Error ("Error requesting web page.")
+        console.error(error.response.data);
+        throw new Error(`Error requesting web page: ${error.message}`);
     }
 }
 
 async function getSummarizedText(text: string): Promise<string> {
         try {
-
             const apiKey = process.env.OPENAI_API_KEY;
             const prompt = `Summarize the following text:\n\n${text}\n\nSummary:`;
 
